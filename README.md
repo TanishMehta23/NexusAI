@@ -6,17 +6,15 @@ This project is being developed from scratch to understand how modern AI agents 
 
 ---
 
-## 🚀 Current Features
+## Current Features
 
-* 💬 Chat with Google Gemini
-* 🧠 System Prompt for custom AI personality
-* 📝 Conversation Memory
-* 🏗 Modular Project Architecture
-* 🔧 Tool Registry
-* 🖥 Open Desktop Applications
-* 🎵 Support for Microsoft Store apps (e.g. Spotify)
-* ⚡ Automatic Executable Discovery
-* 🤖 Agent-Based Request Processing
+- AI chat powered by Google Gemini 2.5 Flash
+- Native Gemini Function Calling
+- Windows application launcher
+- PostgreSQL-backed conversation history
+- Long-term memory storage
+- Modular AI agent architecture
+- Environment variable configuration
 
 ---
 
