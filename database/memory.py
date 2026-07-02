@@ -72,3 +72,17 @@ def get_all_memories():
     conn.close()
 
     return rows
+
+def format_memories():
+
+    memories = get_all_memories()
+
+    if not memories:
+        return "No saved memories."
+
+    formatted = ""
+
+    for key, value in memories:
+        formatted += f"{key}: {value}\n"
+
+    return formatted

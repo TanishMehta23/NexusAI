@@ -5,6 +5,7 @@ load_dotenv()
 
 # Gemini
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 if not GEMINI_API_KEY:
     raise ValueError("Gemini API Key not found.")

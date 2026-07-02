@@ -4,6 +4,7 @@ from google.genai import types
 from config.settings import GEMINI_API_KEY
 from prompts.system_prompt import SYSTEM_PROMPT
 from memory.conversation import get_history
+from database.memory import format_memories
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -42,10 +43,26 @@ remember_function = types.FunctionDeclaration(
     },
 )
 
+search_function = types.FunctionDeclaration(
+    name="search_web",
+    description="Search the internet for current or real-time information.",
+    parameters_json_schema={
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "The search query."
+            }
+        },
+        "required": ["query"]
+    }
+)
+
 tool = types.Tool(
     function_declarations=[
         function,
         remember_function,
+        search_function,
     ]
 )
 
@@ -54,15 +71,20 @@ def get_function_call(user_prompt: str):
 
     history = get_history()
 
+    memories = format_memories()
+
     prompt = f"""
-{SYSTEM_PROMPT}
+    {SYSTEM_PROMPT}
 
-Conversation History:
-{history}
+    Known User Memories:
+    {memories}
 
-User:
-{user_prompt}
-"""
+    Conversation History:
+    {history}
+
+    User:
+    {user_prompt}
+    """
 
     response = client.models.generate_content(
         model="gemini-2.5-flash",
@@ -105,4 +127,5 @@ Respond naturally to the user.
     )
 
     return response.text
+
 
